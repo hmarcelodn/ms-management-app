@@ -1,0 +1,31 @@
+version: '3'
+services:
+  rabbitmq:
+    image: "rabbitmq:management"
+    ports:
+      - "4369:4369"
+      - "5671:5671"
+      - "5672:5672"
+      - "25672:25672"
+      - "15671:15671"
+      - "15672:15672"   
+  tile38:
+    image: tile38/tile38:latest
+    links:
+      - rabbitmq
+    ports:
+      - "9851:9851"
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: universo_app
+    volumes:
+      - /var/lib/postgresql/data           

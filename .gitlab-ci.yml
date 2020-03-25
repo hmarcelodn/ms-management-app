@@ -1,0 +1,36 @@
+image: node:latest
+
+stages:
+  - build
+  - development
+  
+build-package:
+  stage: build
+  script:
+    - rm -rf node-modules
+    - npm install
+    - npm install -g apidoc
+    - apidoc -i src/ -o ./public/apidoc
+  cache:
+    paths:
+      - node_modules/    
+  artifacts:
+    expire_in: 10 mins
+    paths:
+      - public/*   
+  only:
+    - master
+
+development:
+  stage: development
+  image: ruby:latest
+  dependencies:
+    - build-package  
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - ls -l
+    - dpl --provider=heroku --app=universo-api-stage --api-key=$HEROKU_API_KEY --skip_cleanup
+  only:
+    - master

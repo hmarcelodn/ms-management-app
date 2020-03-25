@@ -1,0 +1,51 @@
+version: '3'
+services:
+  ms-management-app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: universo_app
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672/
+      TILE38_HOST: tile38
+      TILE38_PORT: 9851
+      REDIS_HOST: redis
+      REDIS_PORT: 6379      
+    links:
+      - rabbitmq
+      - tile38
+      - redis
+      - postgres      
+    volumes:
+      - .:/app      
+  rabbitmq:
+    image: "rabbitmq:management"
+    ports:
+      - "4369:4369"
+      - "5671:5671"
+      - "5672:5672"
+      - "25672:25672"
+      - "15671:15671"
+      - "15672:15672"   
+  tile38:
+    image: tile38/tile38:latest
+    links:
+      - rabbitmq
+    ports:
+      - "9851:9851"
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: universo_app
+    volumes:
+      - /var/lib/postgresql/data    
