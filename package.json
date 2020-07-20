@@ -28,7 +28,7 @@
       "express-winston": "^3.0.1",
       "guid": "0.0.12",
       "jsonwebtoken": "^8.3.0",
-      "lodash": "^4.17.11",
+      "lodash": "^4.17.19",
       "moment": "^2.22.2",
       "mongodb": "^2.2.31",
       "password-validator": "^4.1.1",
