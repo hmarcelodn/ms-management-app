@@ -44,7 +44,7 @@
       "tile38": "^0.6.6",
       "ts-node": "^3.3.0",
       "typedi": "^0.8.0",
-      "typeorm": "0.2.8",
+      "typeorm": "0.2.25",
       "typescript": "^2.5.2",
       "uuid": "^3.3.2",
       "winston": "^3.1.0"
