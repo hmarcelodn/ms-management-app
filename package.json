@@ -29,7 +29,7 @@
       "guid": "0.0.12",
       "jsonwebtoken": "^8.3.0",
       "lodash": "^4.17.11",
-      "moment": "^2.22.2",
+      "moment": "^2.29.2",
       "mongodb": "^2.2.31",
       "password-validator": "^4.1.1",
       "pg": "^7.6.1",
